@@ -4,7 +4,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		"WHERE film.id = ?" ;
 		try {
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/sdvid?useSSL=false" , "student" , "student" ) ;
+					"jdbc:mysql://localhost:3306/sdvid?useSSL=false&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" , "student" , "student" ) ;
 			PreparedStatement stmt = conn.prepareStatement( sqltxt ) ;
 			stmt.setInt( 1 , filmId ) ;
 			ResultSet rs = stmt.executeQuery() ;
@@ -63,7 +62,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		String sql = "INSERT INTO film ( title , language_id ) VALUES ( ? , ? )";
 		try {
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/sdvid?useSSL=false" , "student" , "student" ) ;
+					"jdbc:mysql://localhost:3306/sdvid?useSSL=false&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" , "student" , "student" ) ;
 			PreparedStatement checkIfPresent = conn.prepareStatement(
 					"SELECT * FROM film WHERE id = ?" );
 			checkIfPresent.setInt( 1, film.getId() );
@@ -99,7 +98,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		boolean output = false;
 		try {
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/sdvid?useSSL=false" , "student" , "student" ) ;
+					"jdbc:mysql://localhost:3306/sdvid?useSSL=false&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" , "student" , "student" ) ;
 			PreparedStatement checkIfPresent = conn.prepareStatement(check);
 			PreparedStatement deleteCommand = conn.prepareStatement( sql );
 			checkIfPresent.setInt( 1 , filmId );
@@ -132,7 +131,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		try {
 			
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/sdvid?useSSL=false" , "student" , "student" ) ;
+					"jdbc:mysql://localhost:3306/sdvid?useSSL=false&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" , "student" , "student" ) ;
 			PreparedStatement update = conn.prepareStatement( modify );
 			update.setString( 1 , property );
 			update.setString( 2 , value );
@@ -164,7 +163,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		String sql = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
 		try {
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/sdvid?useSSL=false" , "student" , "student" ) ;
+					"jdbc:mysql://localhost:3306/sdvid?useSSL=false&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" , "student" , "student" ) ;
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString( 1 , keyword );
 			stmt.setString( 2 , keyword );
