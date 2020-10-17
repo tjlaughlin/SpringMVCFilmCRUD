@@ -22,7 +22,6 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		film.setTitle( rs.getString( "title" ) ) ;
 		film.setDescription( rs.getString( "description" ) ) ;
 		film.setReleaseYear( rs.getInt( "release_year" ) ) ;
-		film.setLanguage( rs.getString( "name" ) );
 		film.setRentalDuration( rs.getInt( "rental_duration" ) ) ;
 		film.setRentalRate( rs.getDouble( "rental_rate" ) ) ;
 		film.setLength( rs.getInt( "length" ) ) ;
@@ -165,8 +164,8 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			Connection conn = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/sdvid?useSSL=false&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" , "student" , "student" ) ;
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString( 1 , keyword );
-			stmt.setString( 2 , keyword );
+			stmt.setString( 1 , "%" + keyword.toUpperCase() + "%" );
+			stmt.setString( 2 , "%" + keyword.toUpperCase() + "%" );
 			ResultSet rs = stmt.executeQuery();
 			while ( rs.next() ) {
 				Film f = new Film();
