@@ -4,9 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Films</title>
 </head>
 <body>
+
+<h3>Find a Film</h3>
+	<form action="Films.do" method="GET">
+		Film ID:
+		<input type="number" name="filmId"/> 
+		<input type="submit" value="Get Film" />
+	</form>
 
 </body>
 </html>

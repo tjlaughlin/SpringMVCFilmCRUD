@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Hello
+${film.title }
 </body>
 </html>
