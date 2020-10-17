@@ -59,10 +59,10 @@ public class MockFilmDAOImpl implements FilmDAO {
 	}
 
 	@Override
-	public Film editFilm(int filmId) {
+	public Film editFilm( String property, String value , int id ) {
 		Film toEdit = null;
 		for (Film f : filmList) {
-			if (f.getId() == filmId) {
+			if (f.getId() == id) {
 				toEdit = f;
 				break;
 			}
@@ -70,6 +70,19 @@ public class MockFilmDAOImpl implements FilmDAO {
 		if(toEdit != null) {
 			toEdit.setTitle("Title Edited");
 		}
+		
+		switch (property) {
+		case "title":
+			toEdit.setTitle(value);
+			break;
+		case "description":
+			toEdit.setDescription(value);
+			break;
+		default:
+			break;
+		}
+		
+		
 		return toEdit;
 	}
 
