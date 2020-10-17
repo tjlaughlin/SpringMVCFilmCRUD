@@ -39,5 +39,15 @@ public class FilmCRUDController {
 		return mv;
 	}
 	
+	@RequestMapping( path = "deleteFilm.do" )
+	public ModelAndView deleteFilm( int filmId ) {
+		
+		ModelAndView mv  = new ModelAndView();
+		mv.setViewName("filmDeleted");
+		mv.addObject("successful", filmDAO.deleteFilm(filmId));
+		
+		return mv;
+		
+	}
 	
 }

@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +18,19 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		}
 	}
 	public void populateFilmFromDB( Film film , ResultSet rs ) throws SQLException {
+		
 		film.setId( rs.getInt( "film.id" ) ) ;
 		film.setTitle( rs.getString( "title" ) ) ;
+		film.setDescription( rs.getString( "description" ) ) ;
+		film.setReleaseYear( rs.getInt( "release_year" ) ) ;
+		film.setLanguage( rs.getString( "name" ) );
+		film.setRentalDuration( rs.getInt( "rental_duration" ) ) ;
+		film.setRentalRate( rs.getDouble( "rental_rate" ) ) ;
+		film.setLength( rs.getInt( "length" ) ) ;
+		film.setReplacementCost( rs.getDouble( "replacement_cost" ) ) ;
+		film.setRating( rs.getString( "rating" ) ) ;
+		film.setSpecialFeatures( rs.getString( "special_features" ) ) ;
+		
 	}
 	@Override
 	public Film findFilmById( int filmId ) {
@@ -111,10 +123,40 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		return output;
 	}
 	@Override
-	public Film editFilm(int filmId) {
-		Film film = new Film();
-		// TODO Auto-generated method stub
-		return film;
+	public Film editFilm( String property, String value, int id ) {
+		Film edited = null;
+		String modify = "UPDATE film SET ? = ? where id = ?";
+		String retrieve = "SELECT * FROM film WHERE id = ?";
+		
+		
+		try {
+			
+			Connection conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/sdvid?useSSL=false" , "student" , "student" ) ;
+			PreparedStatement update = conn.prepareStatement( modify );
+			update.setString( 1 , property );
+			update.setString( 2 , value );
+			update.setInt( 3 , id );
+			update.executeUpdate();
+			update.close();
+			
+			PreparedStatement getUpdatedRecord = conn.prepareStatement( retrieve );
+			getUpdatedRecord.setInt( 1 , id );
+			ResultSet rs = getUpdatedRecord.executeQuery();
+			edited = new Film();
+			populateFilmFromDB(edited, rs);
+			
+			rs.close();
+			getUpdatedRecord.close();
+			conn.close();
+			
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+	
+		return edited;
+		
+		
 	}
 	@Override
 	public List<Film> findFilmsByKeyword(String keyword) {
