@@ -21,11 +21,11 @@
 </bean>
 
 
-<bean id="dao" class="com.skilldistillery.film.dao.MockFilmDAOImpl"/>
+<!-- <bean id="dao" class="com.skilldistillery.film.dao.MockFilmDAOImpl"/> -->
 
 
 <!-- Uncomment for real database version -->
-<!-- <bean id="dao" class="com.skilldistillery.film.dao.JDBCFilmDAOImpl"/> -->
+<bean id="dao" class="com.skilldistillery.film.dao.JDBCFilmDAOImpl"/>
 
 
 </beans>
