@@ -30,4 +30,14 @@ public class FilmCRUDController {
 		return mv;
 	}
 
+	@RequestMapping(path = "FilmsList.do", method = RequestMethod.GET)
+	public ModelAndView getByKeyword(String keyword) {
+		ModelAndView mv = new ModelAndView(); 
+		
+		mv.setViewName("resultList");
+		mv.addObject("filmList", filmDAO.findFilmsByKeyword(keyword));
+		return mv;
+	}
+	
+	
 }

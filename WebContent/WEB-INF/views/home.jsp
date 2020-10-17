@@ -9,7 +9,7 @@
 <body>
 	<h3>Find a film</h3>
 	<div>
-		<form action="films.do" method="GET">
+		<form action="Films.do" method="GET">
 			Search by Film I.D. number: <input type="text" name="filmId" /> <input
 				type="submit" value="Get film" />
 		</form>
@@ -17,7 +17,7 @@
 	<br>
 
 	<div>
-		<form action="films.do" method="GET">
+		<form action="FilmsList.do" method="GET">
 			Search Films by keyword: <input type="text" name="keyword" /> <input
 				type="submit" value="Get films" />
 		</form>
