@@ -24,7 +24,7 @@
 	</div>
 	<br>
 
-	<div>
+	<!-- <div>
 		<form action="films.do" method="GET">
 			Create Film: <input type="text" name="creatFilm" /> <input
 				type="submit" value="Create film" />
@@ -52,7 +52,7 @@
 		Film ID:
 		<input type="number" name="filmId"/> 
 		<input type="submit" value="Get Film" />
-	</form>
+	</form> -->
 
 </body>
 </html>

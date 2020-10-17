@@ -7,7 +7,7 @@ import com.skilldistillery.film.entities.Film;
 
 public class MockFilmDAOImpl implements FilmDAO {
 	List<Film> filmList;
-	
+
 	public MockFilmDAOImpl() {
 		filmList = new ArrayList<>();
 		Film film1 = new Film();
@@ -19,24 +19,64 @@ public class MockFilmDAOImpl implements FilmDAO {
 		Film film3 = new Film();
 		film3.setId(3);
 		film3.setTitle("Film 3");
-		
+
 		filmList.add(film1);
 		filmList.add(film2);
 		filmList.add(film3);
-		
-		
+
 	}
-	
+
 	@Override
 	public Film findFilmById(int filmId) {
-		
+
 		for (Film f : filmList) {
 			if (f.getId() == filmId) {
 				return f;
 			}
 		}
 		return null;
-		
+
+	}
+
+	@Override
+	public Film addFilm(Film film) {
+		return filmList.add(film) ? film : null;
+
+	}
+
+	@Override
+	public boolean deleteFilm(int filmId) {
+		boolean output = false;
+		for (Film f : filmList) {
+			if (f.getId() == filmId) {
+				output = true;
+				filmList.remove(f);
+				break;
+			}
+		}
+
+		return output;
+	}
+
+	@Override
+	public Film editFilm(int filmId) {
+		Film toEdit = null;
+		for (Film f : filmList) {
+			if (f.getId() == filmId) {
+				toEdit = f;
+				break;
+			}
+		}
+		if(toEdit != null) {
+			toEdit.setTitle("Title Edited");
+		}
+		return toEdit;
+	}
+
+	@Override
+	public List<Film> findFilmsByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
