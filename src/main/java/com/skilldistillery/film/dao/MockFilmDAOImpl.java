@@ -75,8 +75,13 @@ public class MockFilmDAOImpl implements FilmDAO {
 
 	@Override
 	public List<Film> findFilmsByKeyword(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Film> films = new ArrayList<>();
+		for (Film film : filmList) {
+			if(film.getTitle().contains(keyword)) {
+				films.add(film);
+			}
+		}
+		return films;
 	}
 
 }

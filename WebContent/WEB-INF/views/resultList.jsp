@@ -11,9 +11,9 @@
 	<table>
 		<c:forEach var="f" items="${filmList}">
 			<tr>
-				<td><a href="Films.do?filmId=${f.id }"></a></td>
+				<td><a href="Films.do?filmId=${f.id }">Film ID: ${f.id }</a></td>
 				<td>
-				${f.title }
+				${f.title}
 				</td>
 			</tr>
 		</c:forEach>
