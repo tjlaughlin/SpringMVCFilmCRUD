@@ -4,10 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<HEAD>
 <title>Film Site</title>
-<head/>
-<title>Films</title>
 </head>
 <body>
 	<h3>Find a film</h3>
@@ -18,6 +15,7 @@
 		</form>
 	</div>
 	<br>
+
 	<div>
 		<form action="films.do" method="GET">
 			Search Films by keyword: <input type="text" name="keyword" /> <input
@@ -25,6 +23,7 @@
 		</form>
 	</div>
 	<br>
+
 	<div>
 		<form action="films.do" method="GET">
 			Create Film: <input type="text" name="creatFilm" /> <input
@@ -32,6 +31,7 @@
 		</form>
 	</div>
 	<br>
+
 	<div>
 		<form action="films.do" method="GET">
 			Update Film: <input type="text" name="update" /> <input type="submit"
@@ -39,17 +39,20 @@
 		</form>
 	</div>
 	<br>
+
 	<div>
 		<form action="films.do" method="GET">
 			Delete Film: <input type="text" name="delete" /> <input type="submit"
 				value="Delete film" />
 		</form>
 	</div>
+
 <h3>Find a Film</h3>
 	<form action="Films.do" method="GET">
 		Film ID:
 		<input type="number" name="filmId"/> 
 		<input type="submit" value="Get Film" />
 	</form>
+
 </body>
 </html>
