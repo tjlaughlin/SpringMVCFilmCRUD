@@ -19,6 +19,7 @@ public class Film {
 	private String specialFeatures;
 	private List<Actor> actors = new ArrayList<>();
 	private List<String> categories = new ArrayList<>();
+	private List<Rental> rentals = new ArrayList<>();
 	
 //	public Film(int id, String title, String description, int releaseYear, String language, int rentalDuration,
 //			double rentalRate, int length, double replacementCost, String rating, String specialFeatures,
@@ -37,6 +38,14 @@ public class Film {
 //		this.specialFeatures = specialFeatures;
 //		this.actors = actors;
 //	}
+
+	public List<Rental> getRentals() {
+		return rentals;
+	}
+
+	public void setRentals(List<Rental> rentals) {
+		this.rentals = rentals;
+	}
 
 	public List<String> getCategories() {
 		return categories;

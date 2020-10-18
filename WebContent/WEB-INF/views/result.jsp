@@ -82,6 +82,19 @@
 			</table>
 
 			<br>
+			
+			<table>
+				<caption>Rental History</caption>
+				<thead>
+					<tr>
+						<th>Rental Date</th><th>Customer Name</th><th>Store Location</th>
+					</tr>
+				<c:forEach var="r" items="${film.rentals}">
+					<tr>
+						<td>${r.rentalDate }</td><td>${r.customerName }</td><td>${r.storeLocation }</td>
+					</tr>
+				</c:forEach>
+			</table>
 
 			<form action="deleteFilm.do" method="GET">
 				<input type="hidden" name="filmId" value="${film.id }" /> <input

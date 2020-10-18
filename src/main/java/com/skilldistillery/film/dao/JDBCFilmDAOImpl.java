@@ -5,11 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.skilldistillery.film.entities.Actor;
 import com.skilldistillery.film.entities.Film;
+import com.skilldistillery.film.entities.Rental;
 public class JDBCFilmDAOImpl implements FilmDAO {
 	static {
 		try {
@@ -67,9 +69,35 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		}
 		
 		film.setCategories( genres );
-		
 		rs3.close();
 		categories.close();
+		
+		String rentalQuery = "SELECT r.rental_date \"rental_date\" , " +
+				"CONCAT( c.first_name , ' ' , c.last_name ) \"customer_name\" , " +
+				"CONCAT( a.city , ', ' , a.state_province ) \"store_location\" " +
+				"FROM rental r JOIN inventory_item i ON r.inventory_id = i.id " +
+				"JOIN customer c ON c.id = r.customer_id " +
+				"JOIN store s ON i.store_id = s.id " +
+				"JOIN address a on s.address_id = a.id " +
+				"WHERE i.film_id = ?";
+		List<Rental> rentals = new ArrayList<>();
+		PreparedStatement getRentals = conn.prepareStatement(rentalQuery);
+		getRentals.setInt( 1 , rs.getInt( "film.id" ) );
+		ResultSet rs4 = getRentals.executeQuery();
+		
+		while ( rs4.next() ) {
+			
+			Rental nextRental = new Rental();
+			nextRental.setCustomerName( rs4.getString( "customer_name" ) );
+			nextRental.setStoreLocation( rs4.getString( "store_location" ) );
+			nextRental.setRentalDate( LocalDate.parse( rs4.getString("rental_date" ).split(" ")[0] ) );
+			rentals.add(nextRental);
+			
+		}
+		
+		film.setRentals(rentals);
+		rs4.close();
+		getRentals.close();		
 		
 	}
 	
