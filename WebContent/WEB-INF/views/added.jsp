@@ -11,16 +11,14 @@
 <body>
 	<c:choose>
 		<c:when test="${! empty film }">
-			Film added
-			<br>
-			${film.id }
+			Film added with ID ${film.id }<br>
+			<a href="Films.do?filmId=${film.id}">View and edit this new film</a>
 		
 		</c:when>
 		<c:otherwise>
 			Unable to add film
 		</c:otherwise>
 	</c:choose>
-	<a href="Films.do?filmId=${film.id }">Continue</a>
 
 </body>
 </html>

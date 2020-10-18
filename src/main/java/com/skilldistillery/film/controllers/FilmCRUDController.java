@@ -135,7 +135,7 @@ public class FilmCRUDController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("updated");
 		mv.addObject("updatedFilmId", Integer.valueOf(id));
-		mv.addObject("film", filmDAO.editFilm("replacement_cost", length, id));
+		mv.addObject("film", filmDAO.editFilm("length", length, id));
 		return mv;
 	}
 
