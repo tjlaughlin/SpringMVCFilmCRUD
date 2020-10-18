@@ -11,6 +11,8 @@
 	<c:choose>
 		<c:when test="${! empty film }">
 
+			Film ID: ${film.id }
+			<br>
 			<form action="FilmsUpdate.do" method="POST">
 				<label for="title">Title:</label>
 				<input type="text" name="title" value="${film.title }" />
@@ -20,7 +22,7 @@
 			<br>
 			<form action="FilmsUpdate.do" method="POST">
 				<label for="description">Description:</label>
-				<input type="text" name="description" value="${film.description }" />
+				<input type="text" name="description" value="${film.description }" size="100" />
 				<input type="hidden" name ="id" value="${film.id }"/>
 				<input type="submit" value="Update" />
 			</form>
@@ -54,12 +56,18 @@
 			</form>
 			<br>
 			<form action="FilmsUpdate.do" method="POST">
-				<label for="length">Replacement Cost:</label>
+				<label for="length">Length:</label>
 				<input type="text" name="length" value="${film.length }" />
 				<input type="hidden" name ="id" value="${film.id }"/>
 				<input type="submit" value="Update" />
 			</form>
 			<br>
+			
+			<form action="deleteFilm.do" method="GET">
+				<input type="hidden" name ="filmId" value="${film.id }"/>
+				<input type="submit" value="Delete Film From Database" />
+			</form>
+			
 
 		</c:when>
 		<c:otherwise>
