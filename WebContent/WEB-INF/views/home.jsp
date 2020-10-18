@@ -24,14 +24,14 @@
 	</div>
 	<br>
 
-	<!-- <div>
-		<form action="films.do" method="GET">
-			Create Film: <input type="text" name="creatFilm" /> <input
+	 <div>
+		<form action="createFilm.do" method="POST">
+			Create Film: <input type="text" name="title" /> <input
 				type="submit" value="Create film" />
 		</form>
 	</div>
 	<br>
-
+<!--
 	<div>
 		<form action="films.do" method="GET">
 			Update Film: <input type="text" name="update" /> <input type="submit"

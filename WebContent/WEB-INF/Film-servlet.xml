@@ -11,7 +11,7 @@
 
 
 <!-- Enables redirect attributes in controller -->
-<!--  <mvc:annotation-driven/> -->
+<mvc:annotation-driven/>
  
  
  <!-- View resolver to allow us to leave off /WEB-INF/views and .jsp in our controller -->

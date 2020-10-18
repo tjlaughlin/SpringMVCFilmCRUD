@@ -2,11 +2,14 @@ package com.skilldistillery.film.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.film.dao.FilmDAO;
+import com.skilldistillery.film.entities.Film;
 
 @Controller
 public class FilmCRUDController {
@@ -49,6 +52,29 @@ public class FilmCRUDController {
 		return mv;
 		
 	}
+	
+	
+
+	@RequestMapping(path="createFilm.do",
+            method=RequestMethod.POST)
+	public ModelAndView newFilm(@ModelAttribute("film") Film film, RedirectAttributes redir) {
+	    film = filmDAO.addFilm(film);
+	    ModelAndView mv = new ModelAndView();
+	    redir.addFlashAttribute("film", film);
+	    mv.setViewName("redirect:filmCreated.do");
+	    return mv;
+	  }
+
+	  @RequestMapping(path="filmCreated.do",
+	                  method=RequestMethod.GET)
+	  public ModelAndView createdFilm() {
+	    ModelAndView mv = new ModelAndView();
+	    mv.addObject("film");
+	    mv.setViewName("added");
+	    return mv;
+	  }
+	
+	
 	
 	@RequestMapping( path = "FilmsUpdate.do", method = RequestMethod.POST, params = "title")
 	public ModelAndView editFilmTitle(int id, String title ) {

@@ -35,7 +35,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		Film film = null ;
 		String sqltxt = "SELECT * FROM film " +
 		"JOIN language ON film.language_id = language.id " +
-		"JOIN film_list on film.id = film_list.FID " +
+//		"JOIN film_list on film.id = film_list.FID " +
 		"WHERE film.id = ?" ;
 		try {
 			Connection conn = DriverManager.getConnection(
@@ -62,6 +62,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		try {
 			Connection conn = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/sdvid?useSSL=false&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" , "student" , "student" ) ;
+			conn.setAutoCommit(false);
 			PreparedStatement checkIfPresent = conn.prepareStatement(
 					"SELECT * FROM film WHERE id = ?" );
 			checkIfPresent.setInt( 1, film.getId() );
@@ -70,11 +71,15 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 				return newFilm;
 			}
 			checkIfPresent.close();
-			PreparedStatement stmt = conn.prepareStatement( sql ) ;
+			PreparedStatement stmt = conn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS ) ;
 			stmt.setString( 1 , film.getTitle() ) ;
 			stmt.setInt( 2 , 1 );
-			int newId = stmt.executeUpdate(sql , Statement.RETURN_GENERATED_KEYS );
+			stmt.executeUpdate();
+			ResultSet key = stmt.getGeneratedKeys();
+			key.next();
+			int newId = key.getInt(1);
 			stmt.close();
+			
 			PreparedStatement getNewObj = conn.prepareStatement(
 					"SELECT * FROM film where id = ?");
 			getNewObj.setInt( 1 , newId );
@@ -84,6 +89,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			populateFilmFromDB(newFilm, rs);
 			rs.close();
 			getNewObj.close();
+			conn.commit();
 			conn.close();
 		} catch ( SQLException e ) {
 			e.printStackTrace();
@@ -93,7 +99,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	@Override
 	public boolean deleteFilm(int filmId) {
 		String check = "SELECT * FROM film WHERE id = ?";
-		String sql = "DELETE * FROM film WHERE id = ?";
+		String sql = "DELETE FROM film WHERE id = ?";
 		boolean output = false;
 		try {
 			Connection conn = DriverManager.getConnection(
