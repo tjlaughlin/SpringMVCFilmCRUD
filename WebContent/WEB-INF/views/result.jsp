@@ -59,6 +59,10 @@
 					value="${film.length }" /> <input type="hidden" name="id"
 					value="${film.id }" /> <input type="submit" value="Update" />
 			</form>
+			
+			<!-- categories -->
+			Categories:<br>
+			<c:forEach var="cat" items="${film.categories }">${cat}<br></c:forEach>
 
 			<!-- actors -->
 			<br>
@@ -83,6 +87,7 @@
 				<input type="hidden" name="filmId" value="${film.id }" /> <input
 					type="submit" value="Delete Film From Database" />
 			</form>
+			<a href="index.do">Find another film</a>
 
 
 		</c:when>
