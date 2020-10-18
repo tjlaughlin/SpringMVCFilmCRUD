@@ -79,7 +79,7 @@
 				<c:forEach var="a" items="${film.actors}">
 					<tr>
 						<td>${a.id }</td>
-						<td>${a.firstName }${a.lastName }</td>
+						<td>${a.firstName } ${a.lastName }</td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -99,11 +99,10 @@
 							<td>${r.rentalDate }</td>
 							<td>${r.customerName }</td>
 							<td>
-								${r.storeLocation }
 								<form action="Rental.do" method="GET">
 									<input type="hidden"
 										name="location" value="${r.storeLocation }"/> <input type="submit"
-										value="Go" />
+										value="${r.storeLocation }" />
 								</form>
 							</td>
 						</tr>
