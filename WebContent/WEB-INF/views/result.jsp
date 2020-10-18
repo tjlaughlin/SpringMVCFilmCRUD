@@ -22,15 +22,15 @@
 			<form action="FilmsUpdate.do" method="POST">
 				<label for="description">Description:</label> <input type="text"
 					name="description" value="${film.description }" size="100" /> <input
-					type="hidden" name="id" value="${film.id }" /> <input type="submit"
-					value="Update" />
+					type="hidden" name="id" value="${film.id }" /> <input
+					type="submit" value="Update" />
 			</form>
 			<br>
 			<form action="FilmsUpdate.do" method="POST">
 				<label for="releaseYear">Release Year:</label> <input type="text"
 					name="releaseYear" value="${film.releaseYear }" /> <input
-					type="hidden" name="id" value="${film.id }" /> <input type="submit"
-					value="Update" />
+					type="hidden" name="id" value="${film.id }" /> <input
+					type="submit" value="Update" />
 			</form>
 			<br>
 			<form action="FilmsUpdate.do" method="POST">
@@ -43,8 +43,8 @@
 			<form action="FilmsUpdate.do" method="POST">
 				<label for="rentalRate">Rental Rate:</label> <input type="text"
 					name="rentalRate" value="${film.rentalRate }" /> <input
-					type="hidden" name="id" value="${film.id }" /> <input type="submit"
-					value="Update" />
+					type="hidden" name="id" value="${film.id }" /> <input
+					type="submit" value="Update" />
 			</form>
 			<br>
 			<form action="FilmsUpdate.do" method="POST">
@@ -59,10 +59,11 @@
 					value="${film.length }" /> <input type="hidden" name="id"
 					value="${film.id }" /> <input type="submit" value="Update" />
 			</form>
-			
+
 			<!-- categories -->
 			Categories:<br>
-			<c:forEach var="cat" items="${film.categories }">${cat}<br></c:forEach>
+			<c:forEach var="cat" items="${film.categories }">${cat}<br>
+			</c:forEach>
 
 			<!-- actors -->
 			<br>
@@ -70,30 +71,43 @@
 				<caption>Actors</caption>
 				<thead>
 					<tr>
-						<th>ID</th><th>Name</th>
+						<th>ID</th>
+						<th>Name</th>
 					</tr>
-				
+
 				</thead>
 				<c:forEach var="a" items="${film.actors}">
 					<tr>
-						<td>${a.id }</td><td>${a.firstName } ${a.lastName }</td>
+						<td>${a.id }</td>
+						<td>${a.firstName }${a.lastName }</td>
 					</tr>
 				</c:forEach>
 			</table>
 
 			<br>
-			
+
 			<table>
 				<caption>Rental History</caption>
 				<thead>
 					<tr>
-						<th>Rental Date</th><th>Customer Name</th><th>Store Location</th>
+						<th>Rental Date</th>
+						<th>Customer Name</th>
+						<th>Store Location</th>
 					</tr>
-				<c:forEach var="r" items="${film.rentals}">
-					<tr>
-						<td>${r.rentalDate }</td><td>${r.customerName }</td><td>${r.storeLocation }</td>
-					</tr>
-				</c:forEach>
+					<c:forEach var="r" items="${film.rentals}">
+						<tr>
+							<td>${r.rentalDate }</td>
+							<td>${r.customerName }</td>
+							<td>
+								${r.storeLocation }
+								<form action="Rental.do" method="GET">
+									<input type="hidden"
+										name="location" value="${r.storeLocation }"/> <input type="submit"
+										value="Go" />
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
 			</table>
 
 			<form action="deleteFilm.do" method="GET">

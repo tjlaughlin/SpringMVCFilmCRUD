@@ -138,5 +138,13 @@ public class FilmCRUDController {
 		mv.addObject("film", filmDAO.editFilm("length", length, id));
 		return mv;
 	}
+	
+	@RequestMapping(path = "Rental.do", method = RequestMethod.GET, params = "location")
+	public ModelAndView getById(String location) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("rental");
+		mv.addObject("location", location);
+		return mv;
+	}
 
 }
