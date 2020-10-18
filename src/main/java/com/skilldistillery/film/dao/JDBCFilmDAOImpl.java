@@ -123,7 +123,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	@Override
 	public Film editFilm( String property, String value, int id ) {
 		Film edited = null;
-		String modify = "UPDATE film SET ? = ? where id = ?";
+		String modify = "UPDATE film SET " + property + " = ? where id = ?";
 		String retrieve = "SELECT * FROM film WHERE id = ?";
 		
 		
@@ -132,9 +132,8 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			Connection conn = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/sdvid?useSSL=false&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" , "student" , "student" ) ;
 			PreparedStatement update = conn.prepareStatement( modify );
-			update.setString( 1 , property );
-			update.setString( 2 , value );
-			update.setInt( 3 , id );
+			update.setString( 1 , value );
+			update.setInt( 2 , id );
 			update.executeUpdate();
 			update.close();
 			
@@ -142,7 +141,9 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			getUpdatedRecord.setInt( 1 , id );
 			ResultSet rs = getUpdatedRecord.executeQuery();
 			edited = new Film();
-			populateFilmFromDB(edited, rs);
+			if (rs.next()) {
+				populateFilmFromDB(edited, rs);
+			}
 			
 			rs.close();
 			getUpdatedRecord.close();

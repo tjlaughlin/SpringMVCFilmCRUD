@@ -50,4 +50,19 @@ public class FilmCRUDController {
 		
 	}
 	
+	@RequestMapping( path = "FilmsUpdate.do", method = RequestMethod.POST, params = "title")
+	public ModelAndView editFilmTitle(int id, String title ) {
+		ModelAndView mv  = new ModelAndView();
+		mv.setViewName("result");
+		mv.addObject("film", filmDAO.editFilm("title", title, id));
+		return mv;
+	}
+	@RequestMapping( path = "FilmsUpdate.do", method = RequestMethod.POST, params = "description")
+	public ModelAndView editFilmDescription(int id, String description ) {
+		ModelAndView mv  = new ModelAndView();
+		mv.setViewName("result");
+		mv.addObject("film", filmDAO.editFilm("description", description, id));
+		return mv;
+	}
+	
 }
